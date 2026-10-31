@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
 <style>html{color-scheme:light}body{margin:0;font:14px/1.5 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>
+/* Media path fallback: works whether images/video sit at the repo root or inside media/ */
+document.addEventListener('error',function(e){var el=e.target;if(!el||!/^(IMG|VIDEO)$/.test(el.tagName)||el.dataset.fb)return;var s=el.getAttribute('src');if(!s||/^(https?:|data:|blob:)/.test(s))return;el.dataset.fb='1';if(el.tagName==='VIDEO'&&el.poster&&!/media\//.test(el.getAttribute('poster')))el.setAttribute('poster','media/'+el.getAttribute('poster'));el.src='media/'+s;},true);
+</script>
 </head>
 <body>
 <title>Good Together Event Page</title>
@@ -521,6 +525,55 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
 .head .icon-btn{border:0;background:none;width:36px;height:36px}
 .head .icon-btn:hover{background:var(--surface)}
 @media (max-width:640px){.head .title{font-size:20px}.nav-right{gap:8px}}
+
+/* Booking widget (Figma: final widget) */
+.tip-i{position:relative;display:inline-flex;vertical-align:-2px;margin-left:2px;color:var(--dd-muted);cursor:help}
+.tip-i .info-i{width:14px;height:14px}
+.tip-i .tip{left:50%;bottom:calc(100% + 6px);font-weight:400;white-space:normal;width:200px;text-align:left;line-height:1.4}
+.tip-i:hover .tip,.tip-i:focus .tip{opacity:1}
+.lbl-note{font-weight:400;font-size:12px;color:var(--dd-muted)}
+.seats{-moz-appearance:textfield}
+.seats::-webkit-inner-spin-button,.seats::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.total span:last-child{color:var(--accent)}
+
+/* Event page sections (Figma: event page) */
+.partner{font-size:13px;color:var(--dd-muted);margin-top:10px}
+.ul-link{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.badge.gray{background:#eef0f3;color:var(--ink);border-radius:4px;font-weight:600;font-size:12px;padding:0 8px}
+.facts{margin-top:32px;font-size:14px}
+.sec-title{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--ink);margin:0}
+.content>section>.sec-title{margin-bottom:0}
+.para{font-size:15px;line-height:1.6;color:#3b3f52}
+.agenda{background:#fff;border:1px solid var(--dd-line);border-radius:var(--r);padding:20px 16px 16px;margin-top:28px;max-width:640px}
+.agenda-head{padding:0 6px 6px}
+.agenda-title{flex:1;font-size:15px;font-weight:600;color:var(--accent);margin:0}
+.steps{gap:0}
+.step{padding:10px 8px;border-radius:6px}
+.step:nth-child(even){background:#f7f8fa}
+.step .bar{margin-top:2px;border-radius:1px;width:3px}
+.step b{font-weight:400;font-size:15px;color:var(--ink)}
+.step small{font-size:11px;color:var(--dd-muted)}
+.comm>svg{width:18px;height:18px;color:var(--ink);margin-top:3px}
+.mini-title{font-size:15px;font-weight:600;color:var(--ink);margin:0}
+.comm p{margin-top:4px;color:#3b3f52;font-size:15px}
+.mini-sub{font-size:14px;color:#3b3f52;margin-top:6px}
+.sec-head .shape{width:32px;height:32px;border-radius:8px;background:var(--accent-soft);color:var(--accent)}
+.sec-head .shape svg{width:18px;height:18px}
+.checks{gap:6px}
+.checks li{font-size:15px;color:#3b3f52;align-items:center}
+.checks li svg{margin-top:0;color:var(--dd-muted);width:15px;height:15px}
+.tags{gap:6px;margin-top:10px}
+.tag{height:22px;border:0;border-radius:4px;color:#fff;font-size:12px;font-weight:600;padding:0 8px}
+.tag.t1{background:#6366f1}.tag.t2{background:#d9578f}.tag.t3{background:#1f8a3b}.tag.t4{background:#7c6ff0}
+.sdgs{margin-top:10px}
+.org-logo{width:96px;height:52px;border-radius:6px}
+.org-name{font-size:20px;font-weight:600;color:var(--ink)}
+.org-loc{font-size:13px;color:var(--dd-muted)}
+.org-desc{margin-top:20px;font-size:15px;line-height:1.6;color:#3b3f52}
+.org-more{margin-top:20px;font-size:15px;color:#3b3f52}
+.link-btn.ul{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.content .sep{margin:40px 0}
+.content .sep.short{margin:32px 0}
 @media (max-width:1180px){
   .body{grid-template-columns:minmax(0,1fr) 360px}
 }
@@ -616,12 +669,12 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
 
       <section class="gallery" aria-label="Event gallery">
         <div class="tile hero" data-i="0" role="button" tabindex="0" aria-label="Open video in viewer">
-          <video id="heroVid" src="media/good-together.mp4" poster="media/poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <video id="heroVid" src="good-together.mp4" poster="poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
         </div>
-        <button class="tile" data-i="1" aria-label="Open photo: care package contents"><img src="media/g1.jpg" alt="Open box packed with bananas, apples, rice, pasta and canned goods"></button>
-        <button class="tile" data-i="2" aria-label="Open photo: group cooking"><img src="media/g2.jpg" alt="Group in aprons preparing food together around a kitchen counter"></button>
-        <button class="tile" data-i="3" aria-label="Open photo: friends embracing"><img src="media/g3.jpg" alt="Three friends hugging and laughing outdoors"></button>
-        <button class="tile" data-i="4" aria-label="Open photo: coffee social"><img src="media/g4.jpg" alt="Three people chatting over coffee at a table"></button>
+        <button class="tile" data-i="1" aria-label="Open photo: care package contents"><img src="g1.jpg" alt="Open box packed with bananas, apples, rice, pasta and canned goods"></button>
+        <button class="tile" data-i="2" aria-label="Open photo: group cooking"><img src="g2.jpg" alt="Group in aprons preparing food together around a kitchen counter"></button>
+        <button class="tile" data-i="3" aria-label="Open photo: friends embracing"><img src="g3.jpg" alt="Three friends hugging and laughing outdoors"></button>
+        <button class="tile" data-i="4" aria-label="Open photo: coffee social"><img src="g4.jpg" alt="Three people chatting over coffee at a table"></button>
         <button class="show-all" id="showAll"><svg class="i"><use href="#i-grid"/></svg><span>Show all media</span></button>
       </section>
 
@@ -629,43 +682,42 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
         <article class="content">
           <section>
             <p class="lead">Meet new people while doing something good. Visit.org brings groups together for an evening of packing care packages for neighbors facing food insecurity, followed by a social hour with tasty treats. Every package your team assembles goes straight to a partner food bank in your city, and part of every booking funds the next round of supplies.</p>
-            <p class="partner">In partnership with <b>Common Table Food Network</b></p>
+            <p class="partner">In partnership with <a href="#org" class="ul-link">Common Table Food Network</a></p>
             <div class="facts">
-              <span class="badge"><svg class="i"><use href="#i-users"/></svg>In-person · Team building</span>
+              <span class="badge gray"><svg class="i"><use href="#i-users"/></svg>In-person in Chicago, USA</span>
               <span class="dot">•</span>
               <span class="fact"><svg class="i"><use href="#i-clock"/></svg>Typically 2 hours</span>
               <span class="dot">•</span>
               <span class="fact"><svg class="i"><use href="#i-users"/></svg>10-40 Participants</span>
               <span class="dot">•</span>
-              <span class="fact"><svg class="i"><use href="#i-lang"/></svg>EN, ES <span class="count" tabindex="0">+1<span class="tip">Also available in Portuguese</span></span></span>
+              <span class="fact"><svg class="i"><use href="#i-lang"/></svg>EN, ES <span class="count" tabindex="0">+2<span class="tip">Also available in Portuguese and French</span></span></span>
             </div>
-            <hr class="sep" style="margin-bottom:0">
+            <hr class="sep">
           </section>
 
-          <section style="margin-top:64px">
-            <h2 class="h2">Details</h2>
+          <section>
+            <h2 class="sec-title">What you’ll do</h2>
             <div class="para">
-              <p>Your group arrives at a partner space in Chicago, Miami, New York, Los Angeles, Dallas, Boston, Atlanta, Austin or Denver. After a short welcome from your Visit.org host, you'll split into packing crews and work through an assembly line of fresh produce, pantry staples and hygiene items.</p>
-              <p>Each crew finishes its boxes with handwritten notes of encouragement. Once the last box is sealed, the room turns into a social hour with drinks, snacks and time to get to know the people you just worked beside.</p>
+              <p>Make an immediate impact on neighbors facing food insecurity in your city! Your team will break off into packing crews of 5 or 6 and work through an assembly line of fresh produce, pantry staples and hygiene products, finishing each box with a handwritten note of encouragement. Every package goes to a partner food bank and reaches local families the next morning. Once the last box is sealed, the room turns into a social hour with drinks, snacks and time to get to know the people you just worked beside.</p>
             </div>
 
             <div class="agenda" id="agenda">
               <div class="agenda-head">
-                <h3 class="h3">What you'll do</h3>
-                <button class="ghost" id="copyAgenda" aria-label="Copy agenda" title="Copy agenda"><svg class="i i20"><use href="#i-copy"/></svg></button>
-                <button class="ghost" id="addCal" aria-label="Add to calendar" title="Add to calendar"><svg class="i i20"><use href="#i-cal"/></svg></button>
+                <h3 class="agenda-title">Agenda</h3>
+                <button class="ghost" id="copyAgenda" aria-label="Download agenda" title="Download agenda"><svg class="i i20" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M4.5 19.5h15"/></svg></button>
+                <button class="ghost" id="addCal" aria-label="Print agenda" title="Print agenda"><svg class="i i20" viewBox="0 0 24 24"><path d="M7 9V4h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect x="7" y="14" width="10" height="6" rx="1"/></svg></button>
                 <button class="ghost" id="shareAgenda" aria-label="Share agenda" title="Share agenda"><svg class="i i20"><use href="#i-share"/></svg></button>
               </div>
               <ol class="steps" id="steps"></ol>
-              <div class="agenda-total"><span>Total running time</span><b id="agendaTotal"></b></div>
+              <div class="agenda-total" hidden><span>Total running time</span><b id="agendaTotal"></b></div>
             </div>
 
             <hr class="sep short">
-            <div class="row-icon">
-              <svg class="i i20"><use href="#i-group"/></svg>
+            <div class="row-icon comm">
+              <svg class="i"><use href="#i-group"/></svg>
               <div>
-                <h3 class="h3">Meet the community</h3>
-                <p>You'll pack alongside local community volunteers and other teams booked the same evening. Expect a friendly mix of colleagues, new neighbors and first-time volunteers.</p>
+                <h3 class="mini-title">Meet the community</h3>
+                <p>Pack alongside local community volunteers and the organization’s own team.</p>
               </div>
             </div>
           </section>
@@ -673,47 +725,48 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
           <hr class="sep">
 
           <section>
-            <div class="sec-head"><span class="shape"><svg class="i i20"><use href="#i-gift"/></svg></span><h2 class="h2">What's included</h2></div>
+            <div class="sec-head"><span class="shape"><svg class="i" viewBox="0 0 24 24"><path d="M18.5 11.5 12 18a4.2 4.2 0 0 1-6-6l7-7a2.8 2.8 0 0 1 4 4l-7 7a1.4 1.4 0 0 1-2-2l6.5-6.5"/></svg></span><h2 class="sec-title">What’s Included</h2></div>
             <ul class="checks">
-              <li><svg class="i"><use href="#i-check"/></svg>All packing supplies, food and hygiene items for 3 care packages per participant</li>
-              <li><svg class="i"><use href="#i-check"/></svg>A social hour with drinks and tasty treats from a local bakery</li>
-              <li><svg class="i"><use href="#i-check"/></svg>A post-event impact report with packages delivered and households reached</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Packing supplies, food and hygiene items</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Social hour with drinks and tasty treats</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Post-event impact report</li>
             </ul>
           </section>
 
           <hr class="sep short">
 
           <section>
-            <div class="sec-head"><span class="shape"><svg class="i i20"><use href="#i-bag"/></svg></span><h2 class="h2">What to bring</h2></div>
+            <div class="sec-head"><span class="shape"><svg class="i" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2"/><path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/></svg></span><h2 class="sec-title">What to bring</h2></div>
             <ul class="checks">
-              <li><svg class="i"><use href="#i-check"/></svg>Comfortable clothes and closed-toe shoes for the packing line</li>
-              <li><svg class="i"><use href="#i-check"/></svg>A reusable water bottle</li>
-              <li><svg class="i"><use href="#i-check"/></svg>Your best handwriting for the encouragement notes</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Comfortable clothes</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Closed-toe shoes</li>
+              <li><svg class="i"><use href="#i-check"/></svg>Reusable water bottle</li>
             </ul>
           </section>
 
           <hr class="sep short">
 
           <section>
-            <div class="sec-head"><span class="shape"><svg class="i i20"><use href="#i-info"/></svg></span><h2 class="h2">What else you should know</h2></div>
-            <p class="para">The venue is wheelchair accessible and the packing line can be set up at seated height on request. Snacks include vegetarian and gluten-free options; tell us about other dietary needs in your booking request. Care packages are collected by the partner food bank the next morning, so nothing needs to be carried home. Requests need at least 14 days' notice so the host can source supplies.</p>
+            <div class="sec-head"><span class="shape"><svg class="i" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><h2 class="sec-title">What else you should know</h2></div>
+            <div class="para">
+              <p>The partner kitchen is in Chicago’s West Loop and is a 5-minute walk from the Morgan station on the Green and Pink lines. Street parking in the area is limited and metered.</p>
+              <p>Volunteers will meet in the kitchen’s community room, which has long tables that allow your team to assemble care packages in a semi-private setting.</p>
+            </div>
           </section>
 
           <hr class="sep">
 
           <section>
-            <h3 class="h3">Impact areas</h3>
-            <p style="color:var(--muted);margin-top:4px">Causes this event supports</p>
+            <h3 class="mini-title">Impact areas</h3>
+            <p class="mini-sub">By participating in this experience you’ll be supporting the following impact areas:</p>
             <div class="tags">
-              <span class="tag">Hunger</span><span class="tag">Food security</span><span class="tag">Community building</span><span class="tag">Social connection and loneliness</span>
+              <span class="tag t1">Hunger &amp; Food Security</span><span class="tag t2">Community Building</span><span class="tag t3">Housing &amp; Homelessness</span><span class="tag t4">Health &amp; Wellbeing</span>
             </div>
           </section>
 
-          <hr class="sep short">
-
-          <section>
-            <h3 class="h3">SDGs</h3>
-            <p style="color:var(--muted);margin-top:4px">UN Sustainable Development Goals this event contributes to</p>
+          <section style="margin-top:40px">
+            <h3 class="mini-title">UN Sustainable Development Goals</h3>
+            <p class="mini-sub">By participating in this experience you’ll be supporting the following SDGs</p>
             <div class="sdgs">
               <span class="sdg" tabindex="0" style="background:#d3a029"><strong>2</strong>Zero hunger<span class="tip">Goal 2 · Zero hunger</span></span>
               <span class="sdg" tabindex="0" style="background:#dd1367"><strong>10</strong>Reduced inequal.<span class="tip">Goal 10 · Reduced inequalities</span></span>
@@ -722,12 +775,12 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
 
           <hr class="sep">
 
-          <section>
+          <section id="org">
             <div class="org-logo"><span>Common<br><i>Table</i></span></div>
             <div class="org-name">Common Table Food Network</div>
-            <div class="org-loc">Nonprofit · 9 US cities</div>
-            <p class="org-desc clamp" id="orgDesc">Common Table connects surplus food from grocers and farms with neighborhood pantries, schools and shelters. Its local teams run distribution in nine cities and rely on corporate and community volunteers to sort, pack and deliver food to families who need it. Every care package assembled at a Good Together event is logged in the network's delivery system, so your team's impact report shows exactly where the boxes went. In 2025 the network delivered more than 1.2 million meals and recruited 18,000 first-time volunteers.</p>
-            <div class="org-more"><span>Want to know more about this organization?</span><button class="link-btn" id="moreBtn" aria-expanded="false">Read more</button></div>
+            <div class="org-loc">Chicago, USA</div>
+            <p class="org-desc" id="orgDesc">This nonprofit is focused on hunger relief and connecting surplus food from grocers and farms with neighborhood pantries, schools and shelters. It is part of a larger network of local food banks and relies on corporate and community volunteers to sort, pack and deliver food to families who need it each week.</p>
+            <div class="org-more"><span>This organization has other experiences available at Visit.org.</span><button class="link-btn ul" id="moreBtn">View all</button></div>
           </section>
 
           <hr class="sep">
@@ -737,7 +790,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
           <form class="book" id="bookForm" novalidate>
             <div class="price" id="priceHead">From $35 <small>/ person</small></div>
             <div class="tier-line">
-              <button type="button" class="tier-btn" id="tierBtn" aria-expanded="false" aria-controls="tierPop">Show fees and pricing options<span id="tierLbl" hidden></span></button>
+              <button type="button" class="tier-btn" id="tierBtn" aria-expanded="false" aria-controls="tierPop">Show all donation tiers<span id="tierLbl" hidden></span></button>
               <div class="meter" id="meter" hidden><span></span><span></span><span></span></div>
               <div class="tier-pop" id="tierPop" hidden>
                 <table><tbody id="tierRows"></tbody></table>
@@ -748,42 +801,40 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
             <div class="fields">
               <div class="two">
                 <div class="field picker" id="dateField">
-                  <label id="dateLbl" for="dateBtn">Date</label>
+                  <label id="dateLbl" for="dateBtn">Date <span class="tip-i" tabindex="0" aria-label="Requests need at least 14 days notice"><svg class="i info-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg><span class="tip">Requests need at least 14 days notice</span></span></label>
                   <button type="button" class="ctl sel" id="dateBtn" aria-haspopup="dialog" aria-expanded="false"><svg class="i"><use href="#i-cal"/></svg><span id="dateTxt">Select date</span><svg class="i chev"><use href="#i-down"/></svg></button>
                   <input type="hidden" id="date">
                   <div class="hint" id="dateHint"></div>
                   <div class="pop cal" id="calPop" role="dialog" aria-label="Choose a date" hidden></div>
                 </div>
                 <div class="field picker" id="timeField">
-                  <label id="timeLbl" for="timeBtn">Time</label>
+                  <label id="timeLbl" for="timeBtn">Time <span class="tip-i" tabindex="0" aria-label="Times shown in the event's local time zone"><svg class="i info-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 8h.01"/></svg><span class="tip">Shown in the event's local time. Change it in the date picker.</span></span></label>
                   <button type="button" class="ctl sel" id="timeBtn" aria-haspopup="listbox" aria-expanded="false"><svg class="i"><use href="#i-clock"/></svg><span id="timeTxt">6:00 PM</span><svg class="i chev"><use href="#i-down"/></svg></button>
                   <input type="hidden" id="time" value="18:00">
                   <div class="pop tlist" id="timePop" role="listbox" aria-labelledby="timeLbl" hidden></div>
                   <div class="pop tz" id="tzPop" role="dialog" aria-label="Choose a time zone" hidden></div>
                 </div>
               </div>
-              <div class="field">
+              <div class="field" hidden>
                 <label for="city">City</label>
                 <select class="ctl" id="city">
                   <option>Atlanta</option><option>Austin</option><option>Boston</option><option selected>Chicago</option><option>Dallas</option><option>Denver</option><option>Los Angeles</option><option>Miami</option><option>New York</option>
                 </select>
               </div>
               <div class="field">
-                <label for="people">Participants</label>
-                <div class="stepper">
-                  <button type="button" id="minus" aria-label="Fewer participants">−</button>
-                  <input id="people" type="number" inputmode="numeric" min="10" max="40" value="30" aria-describedby="peopleHint">
-                  <button type="button" id="plus" aria-label="More participants">+</button>
-                </div>
-                <div class="hint" id="peopleHint">10 to 40 people</div>
+                <label for="people">How many seats do you need? <span class="lbl-note">(10 to 40)</span></label>
+                <button type="button" id="minus" hidden>−</button>
+                <input class="ctl seats" id="people" type="number" inputmode="numeric" min="10" max="40" value="30" aria-describedby="peopleHint">
+                <button type="button" id="plus" hidden>+</button>
+                <div class="hint" id="peopleHint"></div>
               </div>
 
               <div>
-                <div class="total"><span>Estimated total</span><span id="total">$1,050</span></div>
-                <div class="breakdown" id="breakdown">30 × $35</div>
+                <div class="total"><span>Estimated donation</span><span id="total">$1,050</span></div>
+                <div class="breakdown" id="breakdown" hidden>30 × $35</div>
               </div>
-              <div class="give"><svg class="i"><use href="#i-heart"/></svg><span id="giveTxt">Your booking funds about 90 care packages for Chicago families.</span></div>
-              <button class="btn" type="submit">Request to book</button>
+              <div class="give" hidden><svg class="i"><use href="#i-heart"/></svg><span id="giveTxt">Your booking funds about 90 care packages for Chicago families.</span></div>
+              <button class="btn" type="submit">Continue booking</button>
             </div>
           </form>
         </aside>
@@ -837,12 +888,12 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
     ['Social hour with tasty treats',35],
   ];
   const fmt = m => m>=60 ? (Math.floor(m/60)+' hour'+(m>=120?'s':'')+(m%60?' '+(m%60)+' minutes':'')) : m+' minutes';
-  $('#steps').innerHTML = agenda.map(([t,m])=>`<li class="step"><span class="bar"></span><div><b>${t}</b><small><svg class="i" style="width:14px;height:14px"><use href="#i-clock"/></svg>${fmt(m)}</small></div></li>`).join('');
+  $('#steps').innerHTML = agenda.map(([t,m],i)=>`<li class="step"><span class="bar" style="background:${['#6366f1','#e04f5f','#f5b83d','#16a06d','#25253d'][i%5]}"></span><div><b>${t}</b><small><svg class="i" style="width:14px;height:14px"><use href="#i-clock"/></svg>${fmt(m)}</small></div></li>`).join('');
   $('#agendaTotal').textContent = fmt(agenda.reduce((a,[,m])=>a+m,0));
   const agendaText = 'Good Together: Care Package Social\n' + agenda.map(([t,m])=>`• ${t} (${fmt(m)})`).join('\n');
-  $('#copyAgenda').addEventListener('click',()=>copy(agendaText,'Agenda copied'));
+  $('#copyAgenda').addEventListener('click',()=>copy(agendaText,'Agenda copied to your clipboard'));
   $('#shareAgenda').addEventListener('click',()=>copy(location.href.split('#')[0]+'#agenda','Link to agenda copied'));
-  $('#addCal').addEventListener('click',()=>{ $('#date').focus(); toast('Pick a date in the booking card first'); });
+  $('#addCal').addEventListener('click',()=>toast('Printing is turned off in this prototype'));
 
   /* Header actions */
   const fav=$('#favBtn');
@@ -851,7 +902,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
   $('#shareBtn').addEventListener('click',()=>copy(location.href.split('#')[0],'Event link copied'));
 
   /* Read more */
-  $('#moreBtn').addEventListener('click',e=>{ const d=$('#orgDesc'); const open=d.classList.toggle('clamp')===false; e.target.textContent=open?'Show less':'Read more'; e.target.setAttribute('aria-expanded',open); });
+  $('#moreBtn').addEventListener('click',()=>toast('Other experiences aren’t part of this prototype'));
 
   /* Hero video */
   const v=$('#heroVid');
@@ -859,11 +910,11 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
 
   /* Lightbox */
   const media=[
-    {type:'video',src:'media/good-together.mp4',thumb:'media/poster.jpg',alt:'Good Together event film'},
-    {type:'img',src:'media/g1.jpg',alt:'Care package contents'},
-    {type:'img',src:'media/g2.jpg',alt:'Group cooking together'},
-    {type:'img',src:'media/g3.jpg',alt:'Friends embracing outdoors'},
-    {type:'img',src:'media/g4.jpg',alt:'Coffee social'},
+    {type:'video',src:'good-together.mp4',thumb:'poster.jpg',alt:'Good Together event film'},
+    {type:'img',src:'g1.jpg',alt:'Care package contents'},
+    {type:'img',src:'g2.jpg',alt:'Group cooking together'},
+    {type:'img',src:'g3.jpg',alt:'Friends embracing outdoors'},
+    {type:'img',src:'g4.jpg',alt:'Coffee social'},
   ];
   let cur=0, lastFocus=null;
   const stage=$('#lbStage');
@@ -908,7 +959,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
     $('#giveTxt').textContent=`Your booking funds about ${n*3} care packages for ${$('#city').value} families.`;
     const h=$('#peopleHint');
     if(!isNaN(raw)&&(raw<10||raw>40)){ h.textContent='Groups are 10 to 40 people. For larger groups, book two sessions.'; h.classList.add('err'); }
-    else { h.textContent= ti<2 ? `Add ${tiers[ti+1].min-n} more to unlock $${tiers[ti+1].pp} per person` : 'Best price unlocked'; h.classList.remove('err'); }
+    else { h.textContent=''; h.classList.remove('err'); }
   }
   $('#minus').addEventListener('click',()=>{people.value=clampPeople()-1;update();});
   $('#plus').addEventListener('click',()=>{people.value=clampPeople()+1;update();});
@@ -1065,7 +1116,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
     panel.innerHTML=`
       <div class="panel-head"><div><h2 class="h2" id="reqTitle">Send booking request</h2><p style="color:var(--muted);font-size:14px;margin-top:2px">The host reviews your request before anything is charged.</p></div>
       <button class="x" data-close aria-label="Close"><svg class="i i20"><use href="#i-x"/></svg></button></div>
-      <div class="summary"><img src="media/poster.jpg" alt=""><dl>
+      <div class="summary"><img src="poster.jpg" alt=""><dl>
         <dt>Event</dt><dd>Good Together: Care Package Social</dd>
         <dt>When</dt><dd>${nice(d.value)} · ${slotInfo(tIn.value).range} ${slotInfo(tIn.value).abbr}</dd>
         <dt>Where</dt><dd>${$('#city').value}</dd>
@@ -1193,7 +1244,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
         </section>
       </div>
       <aside class="to-side"><div class="sum">
-        <div class="sum-ev"><img src="media/g1.jpg" alt=""><div><h3>Good Together: Care Package Social</h3><p>${city} · ${fmtD(d.value)} · ${p.n} participants</p></div></div>
+        <div class="sum-ev"><img src="g1.jpg" alt=""><div><h3>Good Together: Care Package Social</h3><p>${city} · ${fmtD(d.value)} · ${p.n} participants</p></div></div>
         <div class="sum-row"><b>Donation amount</b><strong>${money(p.total)}</strong></div>
         <div class="sum-lines"><div><span>${p.n} × $${p.pp} per person</span><span>${money(p.total)}</span></div></div>
         <small>Event price includes a <b>${money(p.donation)} donation to the nonprofit</b> on your behalf.</small>
@@ -1524,7 +1575,7 @@ textarea.ctl{height:88px;padding:10px 12px;resize:vertical}
     if(!s){ html=`<div class="lbl">Try asking</div><div style="padding:4px 8px 8px">${prompts.map(p=>`<button class="ai-chip" data-p="${p}">${p}</button>`).join('')}</div>`; }
     else {
       const why=[n&&+n>=10&&+n<=40?`fits ${n} people`:null, city?`runs in ${city.replace(/\b\w/g,c=>c.toUpperCase())}`:null, /food|hunger|volunt|impact|social|team/.test(s)?'matches your cause':null].filter(Boolean);
-      html=`<div class="lbl">AI match</div><button class="ai-item" data-go><img src="media/poster.jpg" alt=""><span><b>Good Together: Care Package Social</b><small>${why.length?'Top match: '+why.join(', '):'In-person · 2 hours · from $35 per person'}</small></span></button>`;
+      html=`<div class="lbl">AI match</div><button class="ai-item" data-go><img src="poster.jpg" alt=""><span><b>Good Together: Care Package Social</b><small>${why.length?'Top match: '+why.join(', '):'In-person · 2 hours · from $35 per person'}</small></span></button>`;
     }
     pop.innerHTML=html; pop.hidden=false;
   }
